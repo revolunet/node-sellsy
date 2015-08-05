@@ -22,11 +22,6 @@ function Sellsy() {
   this.creds = creds;
 }
 
-Sellsy.prototype.getOauth = function () {
-
-  return new OAuth.OAuth(api.requestTokenUrl, api.accessTokenUrl, this.creds.consumerKey, this.creds.consumerSecret, '1.0', null, 'PLAINTEXT');
-};
-
 Sellsy.prototype.api = function () {
   var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
@@ -34,6 +29,12 @@ Sellsy.prototype.api = function () {
   var method = _ref2$method === undefined ? 'Infos.getInfos' : _ref2$method;
   var _ref2$params = _ref2.params;
   var params = _ref2$params === undefined ? {} : _ref2$params;
+
+  var that = this;
+  function getOauth() {
+
+    return new OAuth.OAuth(api.requestTokenUrl, api.accessTokenUrl, that.creds.consumerKey, that.creds.consumerSecret, '1.0', null, 'PLAINTEXT');
+  }
 
   var deferred = Q.defer();
 
@@ -46,7 +47,7 @@ Sellsy.prototype.api = function () {
     })
   };
 
-  this.getOauth().post(api.url, this.creds.userToken, this.creds.userSecret, postData, function (e, data, res) {
+  getOauth().post(api.url, this.creds.userToken, this.creds.userSecret, postData, function (e, data, res) {
     if (e) {
       return deferred.reject(e);
     }

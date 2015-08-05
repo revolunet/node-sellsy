@@ -13,21 +13,24 @@ function Sellsy({creds = {}} = {}) {
   this.creds = creds;
 }
 
-Sellsy.prototype.getOauth = function() {
-
-  return new OAuth.OAuth(
-    api.requestTokenUrl,
-    api.accessTokenUrl,
-    this.creds.consumerKey,
-    this.creds.consumerSecret,
-    '1.0',
-    null,
-    'PLAINTEXT'
-  );
-
-}
-
 Sellsy.prototype.api = function({method = 'Infos.getInfos', params = {}} = {}) {
+
+
+  var that = this;
+  function getOauth() {
+
+    return new OAuth.OAuth(
+      api.requestTokenUrl,
+      api.accessTokenUrl,
+      that.creds.consumerKey,
+      that.creds.consumerSecret,
+      '1.0',
+      null,
+      'PLAINTEXT'
+    );
+
+  }
+
   let deferred = Q.defer();
 
   const postData = {
@@ -39,7 +42,7 @@ Sellsy.prototype.api = function({method = 'Infos.getInfos', params = {}} = {}) {
     })
   };
 
-  this.getOauth().post(
+  getOauth().post(
     api.url,
     this.creds.userToken,
     this.creds.userSecret,
