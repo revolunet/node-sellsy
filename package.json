@@ -1,0 +1,40 @@
+{
+  "name": "node-sellsy",
+  "version": "1.0.0",
+  "description": "Node Sellsy API wrapper",
+  "license": "MIT",
+  "repository": "revolunet/node-babel-boilerplate",
+  "author": {
+    "name": "Julien Bouquillon",
+    "email": "julien@bouquillon.com",
+    "url": "http://github.com/revolunet"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "readme": "node ./node_modules/node-readme/bin/node-readme.js",
+    "test": "find ./spec -iname '*.spec.js' -exec ./node_modules/.bin/babel-node {} \\; | ./node_modules/.bin/tap-spec",
+    "zuul": "./node_modules/zuul/bin/zuul -- spec/**/*.spec.js",
+    "build": "babel -d ./dist ./src"
+  },
+  "main": "dist/index.js",
+  "keywords": [
+    "node",
+    "babel",
+    "test",
+    "tape"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "babel": "5.6.23",
+    "babel-eslint": "3.1.23",
+    "babelify": "6.1.2",
+    "eslint": "1.0.0-rc-1",
+    "eslint-config-airbnb": "0.0.6",
+    "node-readme": "0.1.8",
+    "tap-spec": "4.0.2",
+    "tape": "4.0.0",
+    "zuul": "3.2.0"
+  }
+}
