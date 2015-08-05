@@ -1,5 +1,5 @@
 
-var Sellsy = require('./dist');
+var Sellsy = require('./src');
 
 var sellsy = new Sellsy({
   creds: require('./creds.js')

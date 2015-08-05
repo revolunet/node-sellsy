@@ -15,7 +15,6 @@ function Sellsy({creds = {}} = {}) {
 
 Sellsy.prototype.api = function({method = 'Infos.getInfos', params = {}} = {}) {
 
-
   var that = this;
   function getOauth() {
 

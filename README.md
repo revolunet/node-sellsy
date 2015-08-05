@@ -1,6 +1,6 @@
 # node-sellsy
 
-![npm](https://img.shields.io/npm/v/node-sellsy.svg) ![license](https://img.shields.io/npm/l/node-sellsy.svg) ![github-issues](https://img.shields.io/github/issues/revolunet/node-babel-boilerplate.svg) ![Circle CI build status](https://circleci.com/gh/revolunet/node-babel-boilerplate.svg?style=svg)
+![npm](https://img.shields.io/npm/v/node-sellsy.svg) ![license](https://img.shields.io/npm/l/node-sellsy.svg) ![github-issues](https://img.shields.io/github/issues/revolunet/node-sellsy.svg) ![Circle CI build status](https://circleci.com/gh/revolunet/node-sellsy.svg?style=svg)
 
 ![nodei.co](https://nodei.co/npm/node-sellsy.png?downloads=true&downloadRank=true&stars=true)
 
@@ -39,9 +39,9 @@ var sellsy = new Sellsy({
 });
 
 const params = {
-		search: {
-			contains: 'test',
-		}
+	search: {
+		contains: 'test',
+	}
 };
 
 sellsy.api({

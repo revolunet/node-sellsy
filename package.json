@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Node Sellsy API wrapper",
   "license": "MIT",
-  "repository": "revolunet/node-babel-boilerplate",
+  "repository": "revolunet/node-sellsy",
   "author": {
     "name": "Julien Bouquillon",
     "email": "julien@bouquillon.com",
