@@ -65,6 +65,8 @@ sellsy.api({
 
 Package | Version | Dev
 --- |:---:|:---:
+[oauth](https://www.npmjs.com/package/oauth) | 0.9.13 | ✖
+[q](https://www.npmjs.com/package/q) | 1.4.1 | ✖
 [babel](https://www.npmjs.com/package/babel) | 5.6.23 | ✔
 [babel-eslint](https://www.npmjs.com/package/babel-eslint) | 3.1.23 | ✔
 [babelify](https://www.npmjs.com/package/babelify) | 6.1.2 | ✔

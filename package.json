@@ -25,7 +25,10 @@
     "test",
     "tape"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "oauth": "0.9.13",
+    "q": "1.4.1"
+  },
   "devDependencies": {
     "babel": "5.6.23",
     "babel-eslint": "3.1.23",
