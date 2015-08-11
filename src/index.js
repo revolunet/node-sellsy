@@ -1,4 +1,3 @@
-
 var OAuth = require('oauth');
 var Q = require('q');
 
@@ -6,23 +5,22 @@ const api = {
   url: 'https://apifeed.sellsy.com/0/',
   requestTokenUrl: 'https://apifeed.sellsy.com/0/request_token',
   accessTokenUrl: 'https://apifeed.sellsy.com/0/access_token',
-}
+};
 
 
-function Sellsy({creds = {}} = {}) {
+function Sellsy({ creds = {} } = {}) {
   this.creds = creds;
 }
 
-Sellsy.prototype.api = function({method = 'Infos.getInfos', params = {}} = {}) {
+Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {}) {
 
-  var that = this;
-  function getOauth() {
+  const getOauth = () => {
 
     return new OAuth.OAuth(
       api.requestTokenUrl,
       api.accessTokenUrl,
-      that.creds.consumerKey,
-      that.creds.consumerSecret,
+      this.creds.consumerKey,
+      this.creds.consumerSecret,
       '1.0',
       null,
       'PLAINTEXT'
@@ -46,7 +44,7 @@ Sellsy.prototype.api = function({method = 'Infos.getInfos', params = {}} = {}) {
     this.creds.userToken,
     this.creds.userSecret,
     postData,
-    function (e, data, res){
+    function(e, data, res) {
       if (e) {
         return deferred.reject(e);
       }

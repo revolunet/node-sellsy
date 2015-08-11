@@ -3,7 +3,6 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-
 var OAuth = require('oauth');
 var Q = require('q');
 
@@ -23,6 +22,8 @@ function Sellsy() {
 }
 
 Sellsy.prototype.api = function () {
+  var _this = this;
+
   var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
   var _ref2$method = _ref2.method;
@@ -30,11 +31,10 @@ Sellsy.prototype.api = function () {
   var _ref2$params = _ref2.params;
   var params = _ref2$params === undefined ? {} : _ref2$params;
 
-  var that = this;
-  function getOauth() {
+  var getOauth = function getOauth() {
 
-    return new OAuth.OAuth(api.requestTokenUrl, api.accessTokenUrl, that.creds.consumerKey, that.creds.consumerSecret, '1.0', null, 'PLAINTEXT');
-  }
+    return new OAuth.OAuth(api.requestTokenUrl, api.accessTokenUrl, _this.creds.consumerKey, _this.creds.consumerSecret, '1.0', null, 'PLAINTEXT');
+  };
 
   var deferred = Q.defer();
 
