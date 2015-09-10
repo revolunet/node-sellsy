@@ -23,19 +23,16 @@ For example i use a Stripe webhook to automate actions in Sellsy.
 `npm i --save node-sellsy`
 
 ```js
-// in creds.js
-const creds = {
-  consumerKey: 'myConsumerKey',
-  consumerSecret: 'myConsumerSecret',
-  userToken: 'myUserToken',
-  userSecret: 'myUserSecret'
-};
 
-// example.js
-var Sellsy = require('./dist');
+var Sellsy = require('node-selssy');
 
 var sellsy = new Sellsy({
-  creds: require('./creds.js')
+  creds: {
+    consumerKey: 'myConsumerKey',
+    consumerSecret: 'myConsumerSecret',
+    userToken: 'myUserToken',
+    userSecret: 'myUserSecret'
+  }
 });
 
 const params = {
