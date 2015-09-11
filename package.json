@@ -18,7 +18,7 @@
     "zuul": "./node_modules/zuul/bin/zuul -- spec/**/*.spec.js",
     "build": "babel -d ./dist ./src"
   },
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "keywords": [
     "node",
     "babel",
@@ -37,6 +37,7 @@
     "eslint-config-airbnb": "0.0.6",
     "mockery": "1.4.0",
     "node-readme": "0.1.8",
+    "sinon": "1.16.1",
     "tap-spec": "4.0.2",
     "tape": "4.0.0",
     "zuul": "3.2.0"

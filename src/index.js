@@ -1,6 +1,10 @@
 var OAuth = require('oauth');
 var Q = require('q');
 
+import ERRORS from './ERRORS';
+import Customers from './Customers';
+import Documents from './Documents';
+
 const api = {
   url: 'https://apifeed.sellsy.com/0/',
   requestTokenUrl: 'https://apifeed.sellsy.com/0/request_token',
@@ -10,9 +14,13 @@ const api = {
 
 function Sellsy({ creds = {} } = {}) {
   this.creds = creds;
+  this.customers = new Customers(this);
+  this.documents = new Documents(this);
 }
 
 Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {}) {
+
+  console.log('Sellsy.api', method);
 
   const getOauth = () => {
 
@@ -46,13 +54,14 @@ Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {})
     postData,
     function(e, data, res) {
       if (e) {
+        console.log('oauth.error', e);
         return deferred.reject(e);
       }
       if (data.error) {
-        console.log('data.eror', data.error);
+        console.log('oauth.data.error', data.error);
         return deferred.reject(data.error);
       }
-      return deferred.resolve(data);
+      return deferred.resolve(JSON.parse(data));
     }
   );
 
