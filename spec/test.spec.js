@@ -19,7 +19,10 @@ const OAuthMock = {
   }
 };
 
-mockery.enable();
+mockery.enable({
+    warnOnReplace: false,
+    warnOnUnregistered: false
+});
 mockery.registerMock('oauth', OAuthMock);
 
 let Sellsy = require('../dist');

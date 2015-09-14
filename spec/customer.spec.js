@@ -19,10 +19,11 @@ const dataMocks = {
       valid: {
         response: {
           infos: {
-            nbtotal: '1'
+            nbtotal: '2'
           },
           result: {
-            1: { hello: 'world'}
+            1: { hello: 'world'},
+            2: { x: '123'}
           }
         }
       },
@@ -38,23 +39,30 @@ const dataMocks = {
   }
 };
 
-test("Customers.create should call sellsy api", (t) => {
-  t.plan(3);
-  var sellsyMock = {
+function getSellsyApiMock(apiMock) {
+  // stub sellsy responses with a custom function
+  let sellsyMock = {
     api: function() {}
   };
-  var customers = new Customers(sellsyMock);
-  sinon.stub(sellsyMock, 'api', function(options) {
+  sinon.stub(sellsyMock, 'api', apiMock);
+  return sellsyMock;
+}
+
+test("Customers.create should call sellsy api", (t) => {
+  t.plan(3);
+
+  var sellsyMock = getSellsyApiMock(function(options) {
     if (options.method === 'Client.getList') {
-      //data.response.infos.nbtota
       return when(dataMocks.Client.getList.valid);
     } else if (options.method === 'Client.create') {
       return when(dataMocks.Client.create.success);
     }
-  })
+  });
+  var customers = new Customers(sellsyMock);
+
   let customerData = {id: 123};
   customers.create(customerData).then(result => {
-    // create the customer then fetch it
+    // should create the customer then fetch it
     let clientEmail = 'test@test.com';
     let expectedApiCalls =  [{
       method: 'Client.create',
@@ -63,49 +71,35 @@ test("Customers.create should call sellsy api", (t) => {
       method: 'Client.getList',
       params: { search: customerData }
     },]
-    t.equal(sellsyMock.api.callCount, 2, `should call API for get+create`);
+    t.equal(sellsyMock.api.callCount, 2, `should call API twice`);
     expectedApiCalls.forEach((expectedCall, index) => {
       t.deepEqual(sellsyMock.api.getCall(index).args[0], expectedCall, `should call ${expectedCall.method} with correct data`);
     });
     t.end();
   }).done();
 });
-/*
-test("selssy.api should init call oAuth.OAuth with correct parameters", (t) => {
-  let selssy = new Sellsy({
-    creds: fakeCreds
-  });
-  selssy.api();
-  t.equal(oAuthMockArguments[2], fakeCreds.consumerKey, 'consumerKey');
-  t.equal(oAuthMockArguments[3], fakeCreds.consumerSecret, 'consumerSecret');
-  t.end();
-});
 
+test("Customers.get should call sellsy api", (t) => {
+  t.plan(3);
 
-test("selssy.api post correct data to API", (t) => {
-  let selssy = new Sellsy({
-    creds: fakeCreds
+  var sellsyMock = getSellsyApiMock(function(options) {
+    return when(dataMocks.Client.getList.valid);
   });
-  let apiParams = {
-    method: 'testMethod',
+  var customers = new Customers(sellsyMock);
+
+  let searchParams = {abc: 123};
+  let result = null;
+  customers.get(searchParams).then(result => {
+    let firstResult = dataMocks.Client.getList.valid.response.result[Object.keys(dataMocks.Client.getList.valid.response.result)[0]];
+    t.deepEqual(result, firstResult, `should return first result`);
+  }).done();
+  t.equal(sellsyMock.api.callCount, 1, `should call API`);
+  let expectedCall = {
+    method: 'Client.getList',
     params: {
-      a: 1,
-      d: [42, 43, 44]
+      search: searchParams
     }
   };
-  selssy.api(apiParams);
+  t.deepEqual(sellsyMock.api.getCall(0).args[0], expectedCall, `should call get with correct data`);
 
-  t.equal(oAuthMockPostArguments[1], fakeCreds.userToken, 'userToken');
-  t.equal(oAuthMockPostArguments[2], fakeCreds.userSecret, 'userSecret');
-  t.equal(oAuthMockPostArguments[3].request, 1, 'request');
-  t.equal(oAuthMockPostArguments[3].io_mode, 'json', 'io_mode');
-
-  let params = JSON.parse(oAuthMockPostArguments[3].do_in);
-  t.equal(params.method, apiParams.method, 'method');
-  t.deepEqual(params.params, apiParams.params, 'params');
-  t.end();
 });
-*/
-// test("selssy.api resolve promise on success", (t) => {});
-// test("selssy.api reject promise on error", (t) => {});
-// test("selssy.api reject promise on 500", (t) => {});
