@@ -20,6 +20,38 @@ export default class Documents {
      throw new Error(e);
    })
   }
+  updateStep(docType, docId, step) {
+    return this.sellsy.api({
+      method: 'Document.updateStep',
+      params: {
+        document: {
+          doctype: docType,
+          step: step
+        },
+        docid: docId
+      }
+    }).then(data => {
+      return data.response
+    }).catch(e => {
+      throw new Error(ERRORS.DOCUMENT_UPDATESTEP_ERROR);
+    });
+  }
+  createPayment(docType, docId, paymentData) {
+    return this.sellsy.api({
+      method: 'Document.createPayment',
+      params: {
+        payment: {
+          doctype: docType,
+          docid: docId,
+          ...paymentData
+        }
+      }
+    }).then(data => {
+      return data.response
+    }).catch(e => {
+      throw new Error(ERRORS.DOCUMENT_CREATEPAYMENT_ERROR);
+    });
+  }
   getById(docType, docId) {
     return this.sellsy.api({
       method: 'Document.getOne',
