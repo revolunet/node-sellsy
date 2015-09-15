@@ -20,8 +20,6 @@ function Sellsy({ creds = {} } = {}) {
 
 Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {}) {
 
-  console.log('Sellsy.api', method);
-
   const getOauth = () => {
 
     return new OAuth.OAuth(
@@ -55,12 +53,15 @@ Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {})
     function(e, data, res) {
       if (e) {
         console.log('oauth.error', e);
+        console.log('Sellsy.api OAUTH ERROR', method, params);
         return deferred.reject(e);
       }
       if (data.error) {
         console.log('oauth.data.error', data.error);
+        console.log('Sellsy.api ERROR', method, params);
         return deferred.reject(data.error);
       }
+      //console.log('Sellsy.api', method, params, data);
       return deferred.resolve(JSON.parse(data));
     }
   );
