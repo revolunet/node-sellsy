@@ -18,7 +18,7 @@
     "zuul": "./node_modules/zuul/bin/zuul -- spec/**/*.spec.js",
     "build": "babel -d ./dist ./src"
   },
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "keywords": [
     "node",
     "babel",

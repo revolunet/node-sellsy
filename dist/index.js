@@ -3,8 +3,25 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _Customers = require('./Customers');
+
+var _Customers2 = _interopRequireDefault(_Customers);
+
+var _Documents = require('./Documents');
+
+var _Documents2 = _interopRequireDefault(_Documents);
+
 var OAuth = require('oauth');
 var Q = require('q');
+
+var _ERRORS2 = require('./ERRORS');
+
+var _ERRORS3 = _interopRequireDefault(_ERRORS2);
+
+exports.ERRORS = _ERRORS3['default'];
 
 var api = {
   url: 'https://apifeed.sellsy.com/0/',
@@ -19,6 +36,8 @@ function Sellsy() {
   var creds = _ref$creds === undefined ? {} : _ref$creds;
 
   this.creds = creds;
+  this.customers = new _Customers2['default'](this);
+  this.documents = new _Documents2['default'](this);
 }
 
 Sellsy.prototype.api = function () {
@@ -49,17 +68,20 @@ Sellsy.prototype.api = function () {
 
   getOauth().post(api.url, this.creds.userToken, this.creds.userSecret, postData, function (e, data, res) {
     if (e) {
+      console.log('oauth.error', e);
+      console.log('Sellsy.api OAUTH ERROR', method, params);
       return deferred.reject(e);
     }
     if (data.error) {
-      console.log('data.eror', data.error);
+      console.log('oauth.data.error', data.error);
+      console.log('Sellsy.api ERROR', method, params);
       return deferred.reject(data.error);
     }
-    return deferred.resolve(data);
+    //console.log('Sellsy.api', method, params, data);
+    return deferred.resolve(JSON.parse(data));
   });
 
   return deferred.promise;
 };
 
 exports['default'] = Sellsy;
-module.exports = exports['default'];
