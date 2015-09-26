@@ -24,7 +24,7 @@ For example i use a Stripe webhook to automate actions in Sellsy.
 
 ```js
 
-var Sellsy = require('node-selssy');
+var Sellsy = require('node-sellsy');
 
 var sellsy = new Sellsy({
   creds: {
