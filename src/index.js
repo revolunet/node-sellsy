@@ -1,7 +1,6 @@
 var OAuth = require('oauth');
 var Q = require('q');
 
-export ERRORS from './ERRORS';
 import Customers from './Customers';
 import Documents from './Documents';
 

@@ -17,12 +17,6 @@ var _Documents2 = _interopRequireDefault(_Documents);
 var OAuth = require('oauth');
 var Q = require('q');
 
-var _ERRORS2 = require('./ERRORS');
-
-var _ERRORS3 = _interopRequireDefault(_ERRORS2);
-
-exports.ERRORS = _ERRORS3['default'];
-
 var api = {
   url: 'https://apifeed.sellsy.com/0/',
   requestTokenUrl: 'https://apifeed.sellsy.com/0/request_token',
@@ -85,3 +79,4 @@ Sellsy.prototype.api = function () {
 };
 
 exports['default'] = Sellsy;
+module.exports = exports['default'];
