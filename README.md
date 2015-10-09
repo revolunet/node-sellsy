@@ -51,6 +51,24 @@ sellsy.api({
 });
 ```
 
+## Api
+
+You can access the full Sellsy API using `sellsy.api({ method, params })`.
+
+Higher-level methods :
+
+#### Customer
+
+ - `sellsy.customers.create(data)`
+ - `sellsy.customers.get({ email: 'customer@gmail.com' })`
+
+#### Document
+
+ - `sellsy.documents.create(data)`
+ - `sellsy.documents.createPayment(docType, docId, paymentData)`
+ - `sellsy.documents.getById(docType, docId)`
+ - `sellsy.documents.updateStep(docType, docId, step)`
+
 ## Scripts
 
  - **npm run readme** : `node ./node_modules/node-readme/bin/node-readme.js`
@@ -71,6 +89,7 @@ Package | Version | Dev
 [eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb) | 0.0.6 | ✔
 [mockery](https://www.npmjs.com/package/mockery) | 1.4.0 | ✔
 [node-readme](https://www.npmjs.com/package/node-readme) | 0.1.8 | ✔
+[sinon](https://www.npmjs.com/package/sinon) | 1.16.1 | ✔
 [tap-spec](https://www.npmjs.com/package/tap-spec) | 4.0.2 | ✔
 [tape](https://www.npmjs.com/package/tape) | 4.0.0 | ✔
 [zuul](https://www.npmjs.com/package/zuul) | 3.2.0 | ✔
