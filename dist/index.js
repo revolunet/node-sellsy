@@ -78,5 +78,9 @@ Sellsy.prototype.api = function () {
   return deferred.promise;
 };
 
+var _ERRORS2 = require('./ERRORS');
+
+var _ERRORS3 = _interopRequireDefault(_ERRORS2);
+
+exports.ERRORS = _ERRORS3['default'];
 exports['default'] = Sellsy;
-module.exports = exports['default'];
