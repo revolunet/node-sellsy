@@ -68,4 +68,6 @@ Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {})
   return deferred.promise;
 }
 
+export ERRORS from './ERRORS';
+
 export default Sellsy;
