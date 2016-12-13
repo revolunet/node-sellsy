@@ -1,10 +1,8 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _Customers = require('./Customers');
 
@@ -13,6 +11,8 @@ var _Customers2 = _interopRequireDefault(_Customers);
 var _Documents = require('./Documents');
 
 var _Documents2 = _interopRequireDefault(_Documents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var OAuth = require('oauth');
 var Q = require('q');
@@ -24,25 +24,23 @@ var api = {
 };
 
 function Sellsy() {
-  var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-  var _ref$creds = _ref.creds;
-  var creds = _ref$creds === undefined ? {} : _ref$creds;
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$creds = _ref.creds,
+      creds = _ref$creds === undefined ? {} : _ref$creds;
 
   this.creds = creds;
-  this.customers = new _Customers2['default'](this);
-  this.documents = new _Documents2['default'](this);
+  this.customers = new _Customers2.default(this);
+  this.documents = new _Documents2.default(this);
 }
 
 Sellsy.prototype.api = function () {
   var _this = this;
 
-  var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-  var _ref2$method = _ref2.method;
-  var method = _ref2$method === undefined ? 'Infos.getInfos' : _ref2$method;
-  var _ref2$params = _ref2.params;
-  var params = _ref2$params === undefined ? {} : _ref2$params;
+  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref2$method = _ref2.method,
+      method = _ref2$method === undefined ? 'Infos.getInfos' : _ref2$method,
+      _ref2$params = _ref2.params,
+      params = _ref2$params === undefined ? {} : _ref2$params;
 
   var getOauth = function getOauth() {
 
@@ -78,5 +76,4 @@ Sellsy.prototype.api = function () {
   return deferred.promise;
 };
 
-exports['default'] = Sellsy;
-module.exports = exports['default'];
+exports.default = Sellsy;

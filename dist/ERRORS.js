@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var ERRORS = {
@@ -13,5 +13,4 @@ var ERRORS = {
   DOCUMENT_CREATEPAYMENT_ERROR: 'DOCUMENT_CREATEPAYMENT_ERROR'
 };
 
-exports['default'] = ERRORS;
-module.exports = exports['default'];
+exports.default = ERRORS;

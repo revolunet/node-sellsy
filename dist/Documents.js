@@ -1,27 +1,27 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _ERRORS = require('./ERRORS');
 
 var _ERRORS2 = _interopRequireDefault(_ERRORS);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var DEFAULT_GET_LIST_PAGINATION = {
   nbperpage: 100,
   pagenum: 1
 };
 
-var Documents = (function () {
+var Documents = function () {
   function Documents(sellsy) {
     _classCallCheck(this, Documents);
 
@@ -42,8 +42,8 @@ var Documents = (function () {
         if (result.status === 'success') {
           return _this.getById(data.document.doctype, result.response.doc_id);
         }
-        throw new Error(_ERRORS2['default'].DOCUMENT_CREATE_ERROR);
-      })['catch'](function (e) {
+        throw new Error(_ERRORS2.default.DOCUMENT_CREATE_ERROR);
+      }).catch(function (e) {
         console.log(e);
         throw new Error(e);
       });
@@ -62,9 +62,9 @@ var Documents = (function () {
         }
       }).then(function (data) {
         return data.response;
-      })['catch'](function (e) {
+      }).catch(function (e) {
         console.log(e);
-        throw new Error(_ERRORS2['default'].DOCUMENT_UPDATESTEP_ERROR);
+        throw new Error(_ERRORS2.default.DOCUMENT_UPDATESTEP_ERROR);
       });
     }
   }, {
@@ -80,9 +80,9 @@ var Documents = (function () {
         }
       }).then(function (data) {
         return data.response;
-      })['catch'](function (e) {
+      }).catch(function (e) {
         console.log(e);
-        throw new Error(_ERRORS2['default'].DOCUMENT_CREATEPAYMENT_ERROR);
+        throw new Error(_ERRORS2.default.DOCUMENT_CREATEPAYMENT_ERROR);
       });
     }
   }, {
@@ -96,15 +96,15 @@ var Documents = (function () {
         }
       }).then(function (data) {
         return data.response;
-      })['catch'](function (e) {
+      }).catch(function (e) {
         console.log(e);
-        throw new Error(_ERRORS2['default'].DOCUMENT_NOT_FOUND);
+        throw new Error(_ERRORS2.default.DOCUMENT_NOT_FOUND);
       });
     }
   }, {
     key: 'getList',
     value: function getList(docType, search) {
-      var pagination = arguments.length <= 2 || arguments[2] === undefined ? DEFAULT_GET_LIST_PAGINATION : arguments[2];
+      var pagination = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DEFAULT_GET_LIST_PAGINATION;
 
       return this.sellsy.api({
         method: 'Document.getList',
@@ -114,15 +114,14 @@ var Documents = (function () {
         }
       }).then(function (data) {
         return data.response;
-      })['catch'](function (e) {
+      }).catch(function (e) {
         console.log(e);
-        throw new Error(_ERRORS2['default'].DOCUMENT_NOT_FOUND);
+        throw new Error(_ERRORS2.default.DOCUMENT_NOT_FOUND);
       });
     }
   }]);
 
   return Documents;
-})();
+}();
 
-exports['default'] = Documents;
-module.exports = exports['default'];
+exports.default = Documents;
