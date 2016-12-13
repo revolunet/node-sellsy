@@ -77,25 +77,6 @@ Higher-level methods :
  - **npm run zuul** : `./node_modules/zuul/bin/zuul -- spec/**/*.spec.js`
  - **npm run build** : `babel -d ./dist ./src`
 
-## Dependencies
-
-Package | Version | Dev
---- |:---:|:---:
-[oauth](https://www.npmjs.com/package/oauth) | 0.9.13 | ✖
-[q](https://www.npmjs.com/package/q) | 1.4.1 | ✖
-[babel](https://www.npmjs.com/package/babel) | 5.6.23 | ✔
-[babel-eslint](https://www.npmjs.com/package/babel-eslint) | 3.1.23 | ✔
-[babelify](https://www.npmjs.com/package/babelify) | 6.1.2 | ✔
-[eslint](https://www.npmjs.com/package/eslint) | 1.0.0-rc-1 | ✔
-[eslint-config-airbnb](https://www.npmjs.com/package/eslint-config-airbnb) | 0.0.6 | ✔
-[mockery](https://www.npmjs.com/package/mockery) | 1.4.0 | ✔
-[node-readme](https://www.npmjs.com/package/node-readme) | 0.1.8 | ✔
-[sinon](https://www.npmjs.com/package/sinon) | 1.16.1 | ✔
-[tap-spec](https://www.npmjs.com/package/tap-spec) | 4.0.2 | ✔
-[tape](https://www.npmjs.com/package/tape) | 4.0.0 | ✔
-[zuul](https://www.npmjs.com/package/zuul) | 3.2.0 | ✔
-
-
 ## Author
 
 Julien Bouquillon <julien@bouquillon.com> http://github.com/revolunet

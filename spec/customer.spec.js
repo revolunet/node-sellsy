@@ -4,7 +4,7 @@ import { when } from 'q';
 import test from 'tape';
 import sinon from 'sinon';
 
-let Customers = require('../src/Customers');
+import Customers from '../src/Customers';
 
 // sample sellsy responses
 const dataMocks = {
