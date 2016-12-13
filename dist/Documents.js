@@ -16,6 +16,11 @@ var _ERRORS = require('./ERRORS');
 
 var _ERRORS2 = _interopRequireDefault(_ERRORS);
 
+var DEFAULT_GET_LIST_PAGINATION = {
+  nbperpage: 100,
+  pagenum: 1
+};
+
 var Documents = (function () {
   function Documents(sellsy) {
     _classCallCheck(this, Documents);
@@ -39,6 +44,7 @@ var Documents = (function () {
         }
         throw new Error(_ERRORS2['default'].DOCUMENT_CREATE_ERROR);
       })['catch'](function (e) {
+        console.log(e);
         throw new Error(e);
       });
     }
@@ -57,6 +63,7 @@ var Documents = (function () {
       }).then(function (data) {
         return data.response;
       })['catch'](function (e) {
+        console.log(e);
         throw new Error(_ERRORS2['default'].DOCUMENT_UPDATESTEP_ERROR);
       });
     }
@@ -74,6 +81,7 @@ var Documents = (function () {
       }).then(function (data) {
         return data.response;
       })['catch'](function (e) {
+        console.log(e);
         throw new Error(_ERRORS2['default'].DOCUMENT_CREATEPAYMENT_ERROR);
       });
     }
@@ -89,6 +97,25 @@ var Documents = (function () {
       }).then(function (data) {
         return data.response;
       })['catch'](function (e) {
+        console.log(e);
+        throw new Error(_ERRORS2['default'].DOCUMENT_NOT_FOUND);
+      });
+    }
+  }, {
+    key: 'getList',
+    value: function getList(docType, search) {
+      var pagination = arguments.length <= 2 || arguments[2] === undefined ? DEFAULT_GET_LIST_PAGINATION : arguments[2];
+
+      return this.sellsy.api({
+        method: 'Document.getList',
+        params: {
+          doctype: docType,
+          search: search
+        }
+      }).then(function (data) {
+        return data.response;
+      })['catch'](function (e) {
+        console.log(e);
         throw new Error(_ERRORS2['default'].DOCUMENT_NOT_FOUND);
       });
     }
