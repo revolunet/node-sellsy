@@ -66,6 +66,7 @@ Higher-level methods :
 
  - `sellsy.documents.create(data)`
  - `sellsy.documents.createPayment(docType, docId, paymentData)`
+ - `sellsy.documents.getList(docType, search)`
  - `sellsy.documents.getById(docType, docId)`
  - `sellsy.documents.updateStep(docType, docId, step)`
 

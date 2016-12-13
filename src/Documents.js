@@ -1,6 +1,11 @@
 
 import ERRORS from './ERRORS';
 
+const DEFAULT_GET_LIST_PAGINATION = {
+  nbperpage: 100,
+  pagenum: 1
+}
+
 export default class Documents {
   constructor(sellsy) {
     //this.udpate = ::this.create;
@@ -12,12 +17,13 @@ export default class Documents {
       method: `Document.${method}`,
       params: data
     }).then(result => {
-     if (result.status === 'success') {
+      if (result.status === 'success') {
        return this.getById(data.document.doctype, result.response.doc_id);
-     }
-     throw new Error(ERRORS.DOCUMENT_CREATE_ERROR);
+      }
+      throw new Error(ERRORS.DOCUMENT_CREATE_ERROR);
    }).catch(e => {
-     throw new Error(e);
+      console.log(e)
+      throw new Error(e);
    })
   }
   updateStep(docType, docId, step) {
@@ -33,6 +39,7 @@ export default class Documents {
     }).then(data => {
       return data.response
     }).catch(e => {
+      console.log(e)
       throw new Error(ERRORS.DOCUMENT_UPDATESTEP_ERROR);
     });
   }
@@ -49,6 +56,7 @@ export default class Documents {
     }).then(data => {
       return data.response
     }).catch(e => {
+      console.log(e)
       throw new Error(ERRORS.DOCUMENT_CREATEPAYMENT_ERROR);
     });
   }
@@ -62,6 +70,21 @@ export default class Documents {
     }).then(data => {
       return data.response
     }).catch(e => {
+      console.log(e)
+      throw new Error(ERRORS.DOCUMENT_NOT_FOUND);
+    });
+  }
+  getList(docType, search, pagination=DEFAULT_GET_LIST_PAGINATION) {
+    return this.sellsy.api({
+      method: 'Document.getList',
+      params: {
+        doctype: docType,
+        search: search
+      }
+    }).then(data => {
+      return data.response
+    }).catch(e => {
+      console.log(e)
       throw new Error(ERRORS.DOCUMENT_NOT_FOUND);
     });
   }
