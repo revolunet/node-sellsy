@@ -34,27 +34,27 @@ const fakeCreds = {
   userSecret: 'myUserSecret'
 };
 
-test("selssy.api should be defined", (t) => {
-  let selssy = new Sellsy({
+test("sellsy.api should be defined", (t) => {
+  let sellsy = new Sellsy({
     creds: fakeCreds
   });
-  t.equal(typeof selssy.api, 'function');
+  t.equal(typeof sellsy.api, 'function');
   t.end();
 });
 
-test("selssy.api should init call oAuth.OAuth with correct parameters", (t) => {
-  let selssy = new Sellsy({
+test("sellsy.api should init call oAuth.OAuth with correct parameters", (t) => {
+  let sellsy = new Sellsy({
     creds: fakeCreds
   });
-  selssy.api();
+  sellsy.api();
   t.equal(oAuthMockArguments[2], fakeCreds.consumerKey, 'consumerKey');
   t.equal(oAuthMockArguments[3], fakeCreds.consumerSecret, 'consumerSecret');
   t.end();
 });
 
 
-test("selssy.api post correct data to API", (t) => {
-  let selssy = new Sellsy({
+test("sellsy.api post correct data to API", (t) => {
+  let sellsy = new Sellsy({
     creds: fakeCreds
   });
   let apiParams = {
@@ -64,7 +64,7 @@ test("selssy.api post correct data to API", (t) => {
       d: [42, 43, 44]
     }
   };
-  selssy.api(apiParams);
+  sellsy.api(apiParams);
 
   t.equal(oAuthMockPostArguments[1], fakeCreds.userToken, 'userToken');
   t.equal(oAuthMockPostArguments[2], fakeCreds.userSecret, 'userSecret');
@@ -77,6 +77,6 @@ test("selssy.api post correct data to API", (t) => {
   t.end();
 });
 
-// test("selssy.api resolve promise on success", (t) => {});
-// test("selssy.api reject promise on error", (t) => {});
-// test("selssy.api reject promise on 500", (t) => {});
+// test("sellsy.api resolve promise on success", (t) => {});
+// test("sellsy.api reject promise on error", (t) => {});
+// test("sellsy.api reject promise on 500", (t) => {});

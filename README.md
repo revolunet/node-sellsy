@@ -77,6 +77,47 @@ Higher-level methods :
  - **npm run zuul** : `./node_modules/zuul/bin/zuul -- spec/**/*.spec.js`
  - **npm run build** : `babel -d ./dist ./src`
 
+## Tests
+
+```
+
+  Customers.create should call sellsy api
+
+    ✓ should call API twice
+    ✓ should call Client.create with correct data
+    ✓ should call Client.getList with correct data
+
+  Customers.get should call sellsy api
+
+    ✓ should call API
+    ✓ should call get with correct data
+    ✓ should return first result
+
+  sellsy.api should be defined
+
+    ✓ should be equal
+
+  sellsy.api should init call oAuth.OAuth with correct parameters
+
+    ✓ consumerKey
+    ✓ consumerSecret
+
+  sellsy.api post correct data to API
+
+    ✓ userToken
+    ✓ userSecret
+    ✓ request
+    ✓ io_mode
+    ✓ method
+    ✓ params
+
+
+  total:     15
+  passing:   15
+  duration:  2.3s
+```
+
+
 ## Author
 
 Julien Bouquillon <julien@bouquillon.com> http://github.com/revolunet
