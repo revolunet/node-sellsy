@@ -69,3 +69,4 @@ Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {})
 }
 
 export default Sellsy;
+module.exports = Sellsy;

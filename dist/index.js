@@ -77,3 +77,5 @@ Sellsy.prototype.api = function () {
 };
 
 exports.default = Sellsy;
+
+module.exports = Sellsy;
