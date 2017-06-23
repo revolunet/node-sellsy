@@ -35,10 +35,10 @@ var sellsy = new Sellsy({
   }
 });
 
-const params = {
-	search: {
-		contains: 'test',
-	}
+var params = {
+  search: {
+    contains: 'test',
+  }
 };
 
 sellsy.api({
