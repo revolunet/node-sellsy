@@ -8,7 +8,6 @@ const DEFAULT_GET_LIST_PAGINATION = {
 
 export default class Documents {
   constructor(sellsy) {
-    //this.udpate = ::this.create;
     this.sellsy = sellsy;
   }
   create(data) {

@@ -1,6 +1,5 @@
 'use strict';
 
-import { when } from 'q';
 import test from 'tape';
 import sinon from 'sinon';
 
@@ -53,9 +52,9 @@ test("Customers.create should call sellsy api", (t) => {
 
   var sellsyMock = getSellsyApiMock(function(options) {
     if (options.method === 'Client.getList') {
-      return when(dataMocks.Client.getList.valid);
+      return Promise.resolve(dataMocks.Client.getList.valid);
     } else if (options.method === 'Client.create') {
-      return when(dataMocks.Client.create.success);
+      return Promise.resolve(dataMocks.Client.create.success);
     }
   });
   var customers = new Customers(sellsyMock);
@@ -76,14 +75,14 @@ test("Customers.create should call sellsy api", (t) => {
       t.deepEqual(sellsyMock.api.getCall(index).args[0], expectedCall, `should call ${expectedCall.method} with correct data`);
     });
     t.end();
-  }).done();
+  }).catch(console.log);
 });
 
 test("Customers.get should call sellsy api", (t) => {
   t.plan(3);
 
   var sellsyMock = getSellsyApiMock(function(options) {
-    return when(dataMocks.Client.getList.valid);
+    return Promise.resolve(dataMocks.Client.getList.valid);
   });
   var customers = new Customers(sellsyMock);
 
@@ -92,7 +91,7 @@ test("Customers.get should call sellsy api", (t) => {
   customers.get(searchParams).then(result => {
     let firstResult = dataMocks.Client.getList.valid.response.result[Object.keys(dataMocks.Client.getList.valid.response.result)[0]];
     t.deepEqual(result, firstResult, `should return first result`);
-  }).done();
+  }).catch(console.log);
   t.equal(sellsyMock.api.callCount, 1, `should call API`);
   let expectedCall = {
     method: 'Client.getList',

@@ -1,5 +1,4 @@
 var OAuth = require('oauth');
-var Q = require('q');
 
 import Customers from './Customers';
 import Documents from './Documents';
@@ -33,39 +32,38 @@ Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {})
 
   }
 
-  let deferred = Q.defer();
+  return new Promise((resolve, reject) => {
+    const postData = {
+      request: 1,
+      io_mode: 'json',
+      do_in: JSON.stringify({
+        method: method,
+        params: params
+      })
+    };
 
-  const postData = {
-    request: 1,
-    io_mode: 'json',
-    do_in: JSON.stringify({
-      method: method,
-      params: params
-    })
-  };
-
-  getOauth().post(
-    api.url,
-    this.creds.userToken,
-    this.creds.userSecret,
-    postData,
-    function(e, data, res) {
-      if (e) {
-        console.log('oauth.error', e);
-        console.log('Sellsy.api OAUTH ERROR', method, params);
-        return deferred.reject(e);
+    getOauth().post(
+      api.url,
+      this.creds.userToken,
+      this.creds.userSecret,
+      postData,
+      function(e, data, res) {
+        if (e) {
+          console.log('oauth.error', e);
+          console.log('Sellsy.api OAUTH ERROR', method, params);
+          return reject(e);
+        }
+        if (data.error) {
+          console.log('oauth.data.error', data.error);
+          console.log('Sellsy.api ERROR', method, params);
+          return reject(data.error);
+        }
+        //console.log('Sellsy.api', method, params, data);
+        resolve(JSON.parse(data));
       }
-      if (data.error) {
-        console.log('oauth.data.error', data.error);
-        console.log('Sellsy.api ERROR', method, params);
-        return deferred.reject(data.error);
-      }
-      //console.log('Sellsy.api', method, params, data);
-      return deferred.resolve(JSON.parse(data));
-    }
-  );
+    );
+  })
 
-  return deferred.promise;
 }
 
 export default Sellsy;

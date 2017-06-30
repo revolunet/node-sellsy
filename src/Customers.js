@@ -3,10 +3,10 @@ import ERRORS from './ERRORS';
 
 export default class Customers {
   constructor(sellsy) {
-    this.udpate = ::this.create;
+    this.udpate = this.create;
     this.sellsy = sellsy;
   }
-  create(data) {
+  create = data => {
     let method = data.clientid ? 'update':'create';
     return this.sellsy.api({
       method: `Client.${method}`,
@@ -18,7 +18,7 @@ export default class Customers {
      throw new Error(ERRORS.CUSTOMER_CREATE_ERROR);
     });
   }
-  get(search) {
+  get = search => {
     return this.sellsy.api({
       method: 'Client.getList',
       params: {
