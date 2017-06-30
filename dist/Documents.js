@@ -25,7 +25,6 @@ var Documents = function () {
   function Documents(sellsy) {
     _classCallCheck(this, Documents);
 
-    //this.udpate = ::this.create;
     this.sellsy = sellsy;
   }
 
