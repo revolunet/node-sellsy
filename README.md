@@ -80,41 +80,48 @@ Higher-level methods :
 ## Tests
 
 ```
-
   Customers.create should call sellsy api
 
-    ✓ should call API twice
-    ✓ should call Client.create with correct data
-    ✓ should call Client.getList with correct data
+    ✔ should call API twice
+    ✔ should call Client.create with correct data
+    ✔ should call Client.getList with correct data
 
   Customers.get should call sellsy api
 
-    ✓ should call API
-    ✓ should call get with correct data
-    ✓ should return first result
+    ✔ should call API
+    ✔ should call get with correct data
+    ✔ should return first result
 
   sellsy.api should be defined
 
-    ✓ should be equal
+    ✔ should be equal
 
   sellsy.api should init call oAuth.OAuth with correct parameters
 
-    ✓ consumerKey
-    ✓ consumerSecret
+    ✔ consumerKey
+    ✔ consumerSecret
 
   sellsy.api post correct data to API
 
-    ✓ userToken
-    ✓ userSecret
-    ✓ request
-    ✓ io_mode
-    ✓ method
-    ✓ params
+    ✔ userToken
+    ✔ userSecret
+    ✔ request
+    ✔ io_mode
+    ✔ method
+    ✔ params
+
+  Sellsy should use default api endPoint
+
+    ✔ https://apifeed.sellsy.com/0/
+
+  Sellsy should use given api endPoint
+
+    ✔ http://path.to/proxy/test/
 
 
-  total:     15
-  passing:   15
-  duration:  2.3s
+  total:     17
+  passing:   17
+  duration:  1.8s
 ```
 
 

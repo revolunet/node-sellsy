@@ -3,6 +3,7 @@
 import test from 'tape';
 import mockery from 'mockery';
 
+let oAuthMockUrl;
 let oAuthMockArguments;
 let oAuthMockPostArguments;
 
@@ -12,6 +13,7 @@ const OAuthMock = {
     return {
       'arguments': arguments,
       post: function(url, userToken, userSecret) {
+        oAuthMockUrl = url;
         oAuthMockPostArguments = arguments;
         return arguments;
       }
@@ -74,6 +76,31 @@ test("sellsy.api post correct data to API", (t) => {
   let params = JSON.parse(oAuthMockPostArguments[3].do_in);
   t.equal(params.method, apiParams.method, 'method');
   t.deepEqual(params.params, apiParams.params, 'params');
+  t.end();
+});
+
+test("Sellsy should use default api endPoint", (t) => {
+  let sellsy = new Sellsy({
+    creds: fakeCreds
+  });
+  let apiParams = {};
+  sellsy.api(apiParams);
+
+  t.equal(oAuthMockPostArguments[0], 'https://apifeed.sellsy.com/0/', 'https://apifeed.sellsy.com/0/');
+
+  t.end();
+});
+
+test("Sellsy should use given api endPoint", (t) => {
+  let sellsy = new Sellsy({
+    creds: fakeCreds,
+    endPoint: 'http://path.to/proxy/test'
+  });
+  let apiParams = {};
+  sellsy.api(apiParams);
+
+  t.equal(oAuthMockPostArguments[0], 'http://path.to/proxy/test/', 'http://path.to/proxy/test/');
+
   t.end();
 });
 

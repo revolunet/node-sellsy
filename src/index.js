@@ -3,26 +3,28 @@ var OAuth = require('oauth');
 import Customers from './Customers';
 import Documents from './Documents';
 
+const DEFAULT_ENDPOINT = 'https://apifeed.sellsy.com/0'
+
 const api = {
-  url: 'https://apifeed.sellsy.com/0/',
-  requestTokenUrl: 'https://apifeed.sellsy.com/0/request_token',
-  accessTokenUrl: 'https://apifeed.sellsy.com/0/access_token',
+  url: '/',
+  requestTokenUrl: '/request_token',
+  accessTokenUrl: '/access_token',
 };
 
 
-function Sellsy({ creds = {} } = {}) {
+function Sellsy({ creds = {}, endPoint = DEFAULT_ENDPOINT  } = {}) {
   this.creds = creds;
+  this.endPoint = endPoint;
   this.customers = new Customers(this);
   this.documents = new Documents(this);
 }
 
-Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {}) {
-
+Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {}} = {}) {
   const getOauth = () => {
 
     return new OAuth.OAuth(
-      api.requestTokenUrl,
-      api.accessTokenUrl,
+      this.endPoint + api.requestTokenUrl,
+      this.endPoint + api.accessTokenUrl,
       this.creds.consumerKey,
       this.creds.consumerSecret,
       '1.0',
@@ -43,7 +45,7 @@ Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {} } = {})
     };
 
     getOauth().post(
-      api.url,
+      this.endPoint + api.url,
       this.creds.userToken,
       this.creds.userSecret,
       postData,
