@@ -4,14 +4,13 @@
 
 ![nodei.co](https://nodei.co/npm/node-sellsy.png?downloads=true&downloadRank=true&stars=true)
 
-Node Sellsy API wrapper
+Node Sellsy API wrapper - works in NodeJS **and** in the browser.
 
 The official [Sellsy API](http://api.sellsy.fr/index) is PHP based so here's a NodeJs handy replacement.
 
 It can helps you automate most of Sellsy from their API.
 
 For example i use a Stripe webhook to automate actions in Sellsy.
-
 
 ## Features
 
@@ -51,11 +50,27 @@ sellsy.api({
 });
 ```
 
-## Api
+## API
 
 You can access the full Sellsy API using `sellsy.api({ method, params })`.
 
-Higher-level methods :
+This call returns a promise.
+
+### Browser usage
+
+Sellsy API doesnt provide CORS access so here's a drop-in proxy you can deploy on your own to use `node-bookeo` on the client : [revolunet/sellsy-proxy](http://github.com/revolunet/sellsy-proxy).
+
+Then, define the endPoint when creating your `Sellsy` instance :
+
+```js
+var sellsy = new Sellsy({
+  creds,
+  endPoint: 'http://path/to/sellsy/proxy'
+});
+```
+
+
+### Higher-level API methods :
 
 #### Customer
 
