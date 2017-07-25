@@ -1,0 +1,8 @@
+version: 2
+jobs:
+  test:
+    steps:
+      - checkout
+      - run:
+          name: test
+          command: npm test
