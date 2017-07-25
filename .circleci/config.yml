@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    docker:
+      - image: circleci/node
     steps:
       - checkout
       - run:
@@ -11,11 +13,14 @@ jobs:
       - run:
           name: install-npm-wee
           command: npm install
+          command: npm run build
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - .node_modules
   test:
+    docker:
+      - image: circleci/node
     steps:
       - checkout
       - run:
