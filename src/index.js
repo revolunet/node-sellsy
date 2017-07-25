@@ -50,18 +50,22 @@ Sellsy.prototype.api = function({ method = 'Infos.getInfos', params = {}} = {}) 
       this.creds.userSecret,
       postData,
       function(e, data, res) {
-        if (e) {
-          console.log('oauth.error', e);
-          console.log('Sellsy.api OAUTH ERROR', method, params);
-          return reject(e);
+        try {
+          if (e) {
+            console.log('oauth.error', e);
+            console.log('Sellsy.api OAUTH ERROR', method, params);
+            return reject(e);
+          }
+          if (data.error) {
+            console.log('oauth.data.error', data.error);
+            console.log('Sellsy.api ERROR', method, params);
+            return reject(data.error);
+          }
+          //console.log('Sellsy.api', method, params, data);
+          resolve(JSON.parse(data));
+        } catch(err) {
+          reject(err);
         }
-        if (data.error) {
-          console.log('oauth.data.error', data.error);
-          console.log('Sellsy.api ERROR', method, params);
-          return reject(data.error);
-        }
-        //console.log('Sellsy.api', method, params, data);
-        resolve(JSON.parse(data));
       }
     );
   })
