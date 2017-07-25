@@ -6,7 +6,7 @@
 
 Node Sellsy API wrapper - works in NodeJS **and** in the browser.
 
-The official [Sellsy API](http://api.sellsy.fr/index) is PHP based so here's a NodeJs handy replacement.
+The official [Sellsy API](http://api.sellsy.fr/index) is PHP based so here's a JavaScript handy replacement.
 
 It can helps you automate most of Sellsy from their API.
 
@@ -142,7 +142,7 @@ var sellsy = new Sellsy({
 
 ## Author
 
-Julien Bouquillon <julien@bouquillon.com> http://github.com/revolunet
+Julien Bouquillon <julien@bouquillon.com> http://github.com/revolunet and [contributors](https://github.com/revolunet/node-sellsy/graphs/contributors)
 
 ## License
 
