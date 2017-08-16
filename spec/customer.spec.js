@@ -34,8 +34,23 @@ const dataMocks = {
           result: []
         }
       }
+    },
+    getOne: {
+      valid: {
+        response: {
+          client: { id: '123'},
+          success: true
+        }
+      },
+      invalid: {
+        response: {
+          result: [],
+          success: false
+        }
+      }
     }
-  }
+  },
+
 };
 
 function getSellsyApiMock(apiMock) {
@@ -51,8 +66,8 @@ test("Customers.create should call sellsy api", (t) => {
   t.plan(3);
 
   var sellsyMock = getSellsyApiMock(function(options) {
-    if (options.method === 'Client.getList') {
-      return Promise.resolve(dataMocks.Client.getList.valid);
+    if (options.method === 'Client.getOne') {
+      return Promise.resolve(dataMocks.Client.getOne.valid);
     } else if (options.method === 'Client.create') {
       return Promise.resolve(dataMocks.Client.create.success);
     }
@@ -67,8 +82,8 @@ test("Customers.create should call sellsy api", (t) => {
       method: 'Client.create',
       params: customerData
     },{
-      method: 'Client.getList',
-      params: { search: customerData }
+      method: 'Client.getOne',
+      params: { clientid: 123 }
     },]
     t.equal(sellsyMock.api.callCount, 2, `should call API twice`);
     expectedApiCalls.forEach((expectedCall, index) => {

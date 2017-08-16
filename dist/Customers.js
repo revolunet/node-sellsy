@@ -24,7 +24,15 @@ var Customers = function Customers(sellsy) {
       params: data
     }).then(function (data) {
       if (data.status === 'success') {
-        return _this.get({ id: data.response.client_id });
+        // fetch created customer data
+        return _this.sellsy.api({
+          method: 'Client.getOne',
+          params: {
+            clientid: data.response.client_id
+          }
+        }).then(function (data) {
+          return data.response.client;
+        });
       }
       throw new Error(_ERRORS2.default.CUSTOMER_CREATE_ERROR);
     });

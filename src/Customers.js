@@ -13,7 +13,13 @@ export default class Customers {
       params: data
     }).then(data => {
      if (data.status === 'success') {
-       return this.get({ id: data.response.client_id });
+        // fetch created customer data
+        return this.sellsy.api({
+          method: 'Client.getOne',
+          params: {
+            clientid: data.response.client_id
+          }
+        }).then(data => data.response.client)
      }
      throw new Error(ERRORS.CUSTOMER_CREATE_ERROR);
     });
