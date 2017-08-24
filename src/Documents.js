@@ -78,7 +78,8 @@ export default class Documents {
       method: 'Document.getList',
       params: {
         doctype: docType,
-        search: search
+        search,
+        pagination
       }
     }).then(data => {
       return data.response
