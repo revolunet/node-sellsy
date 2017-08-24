@@ -21,6 +21,11 @@ var DEFAULT_GET_LIST_PAGINATION = {
   pagenum: 1
 };
 
+var DEFAULT_GET_LIST_ORDER = {
+  direction: 'ASC',
+  order: 'doc_displayedDate'
+};
+
 var Documents = function () {
   function Documents(sellsy) {
     _classCallCheck(this, Documents);
@@ -104,13 +109,17 @@ var Documents = function () {
     key: 'getList',
     value: function getList(docType, search) {
       var pagination = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DEFAULT_GET_LIST_PAGINATION;
+      var includePayments = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'N';
+      var order = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : DEFAULT_GET_LIST_ORDER;
 
       return this.sellsy.api({
         method: 'Document.getList',
         params: {
           doctype: docType,
           search: search,
-          pagination: pagination
+          order: order,
+          pagination: pagination,
+          includePayments: includePayments
         }
       }).then(function (data) {
         return data.response;

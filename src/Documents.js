@@ -6,6 +6,11 @@ const DEFAULT_GET_LIST_PAGINATION = {
   pagenum: 1
 }
 
+const DEFAULT_GET_LIST_ORDER = {
+  direction: 'ASC',
+  order: 'doc_displayedDate'
+}
+
 export default class Documents {
   constructor(sellsy) {
     this.sellsy = sellsy;
@@ -73,13 +78,15 @@ export default class Documents {
       throw new Error(ERRORS.DOCUMENT_NOT_FOUND);
     });
   }
-  getList(docType, search, pagination=DEFAULT_GET_LIST_PAGINATION) {
+  getList(docType, search, pagination=DEFAULT_GET_LIST_PAGINATION, includePayments='N', order=DEFAULT_GET_LIST_ORDER) {
     return this.sellsy.api({
       method: 'Document.getList',
       params: {
         doctype: docType,
         search,
-        pagination
+        order,
+        pagination,
+        includePayments
       }
     }).then(data => {
       return data.response
