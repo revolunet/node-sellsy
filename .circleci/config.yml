@@ -9,7 +9,7 @@ jobs:
           name: install-npm
           command: npm install
       - run:
-          bame: build
+          name: build
           command: npm run build
       - run:
           name: test
