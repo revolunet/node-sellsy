@@ -109,7 +109,8 @@ var Documents = function () {
         method: 'Document.getList',
         params: {
           doctype: docType,
-          search: search
+          search: search,
+          pagination: pagination
         }
       }).then(function (data) {
         return data.response;
