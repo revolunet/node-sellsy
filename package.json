@@ -1,6 +1,6 @@
 {
   "name": "node-sellsy",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Node Sellsy API wrapper",
   "license": "MIT",
   "repository": "revolunet/node-sellsy",
