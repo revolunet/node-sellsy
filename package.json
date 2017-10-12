@@ -1,6 +1,6 @@
 {
   "name": "node-sellsy",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Node Sellsy API wrapper",
   "license": "MIT",
   "repository": "revolunet/node-sellsy",
@@ -9,7 +9,10 @@
     "email": "julien@bouquillon.com",
     "url": "http://github.com/revolunet"
   },
-  "files": ["dist", "examples"],
+  "files": [
+    "dist",
+    "examples"
+  ],
   "engines": {
     "node": ">=0.10.0"
   },
@@ -18,7 +21,12 @@
     "build": "babel -d ./dist ./src"
   },
   "main": "dist/index.js",
-  "keywords": ["node", "babel", "test", "tape"],
+  "keywords": [
+    "node",
+    "babel",
+    "test",
+    "tape"
+  ],
   "dependencies": {
     "oauth": "0.9.13"
   },
