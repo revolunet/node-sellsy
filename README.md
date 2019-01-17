@@ -92,6 +92,55 @@ var sellsy = new Sellsy({
  - **npm run zuul** : `./node_modules/zuul/bin/zuul -- spec/**/*.spec.js`
  - **npm run build** : `babel -d ./dist ./src`
 
+## Examples
+
+### Create an invoice
+
+```js
+let sellsy = new Sellsy({
+  creds: {
+    consumerKey: 'myConsumerKey',
+    consumerSecret: 'myConsumerSecret',
+    userToken: 'myUserToken',
+    userSecret: 'myUserSecret'
+  }
+});
+
+const customerIdent = "1234";
+const amountHorsTaxes = 42;
+
+sellsy.customers.get({ ident: customerIdent }).then(customer => {
+  const documentData = {
+    document: {
+      doctype: "invoice",
+      thirdid: customer.id,
+      notes: customer.email,
+      currency: "1",
+      displayedDate: new Date().getTime() / 1000,
+      subject: "Sujet de la facture",
+      tags: "bookeo,stripe"
+    },
+    row: {
+      "1": {
+        // use 'item' for object from catalog
+        row_type: "once",
+        row_name: "titre ligne facture",
+        row_linkedid: null,
+        row_notes: "notes ligne facture",
+        row_tax: 20,
+        row_unitAmount: amountHorsTaxes,
+        row_qt: 1
+      }
+    }
+  };
+
+  return sellsy.documents.create(documentData);
+});
+```
+Then you can use 
+
+`sellsy.documents.updateStep(createdDocument.type, createdDocument.id, 'paid')` to mark invoice as paid and `sellsy.documents.createPayment` to record the payment method
+
 ## Tests
 
 ```
