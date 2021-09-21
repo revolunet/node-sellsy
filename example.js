@@ -1,21 +1,23 @@
-
-var Sellsy = require('./src');
+var Sellsy = require("./src");
 
 var sellsy = new Sellsy({
-  creds: require('./creds.js')
+    creds: require("./creds.js"),
 });
 
 const params = {
-		search: {
-			contains: 'test',
-		}
+    search: {
+        contains: "test",
+    },
 };
 
-sellsy.api({
-  method: 'Client.getList',
-  params: params
-}).then(data => {
-  console.log('data', data);
-}).catch(e => {
-  console.log('error:', e);
-});
+sellsy
+    .api({
+        method: "Client.getList",
+        params: params,
+    })
+    .then((data) => {
+        console.log("data", data);
+    })
+    .catch((e) => {
+        console.log("error:", e);
+    });
