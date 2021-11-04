@@ -1,47 +1,45 @@
 {
-    "name": "node-sellsy",
-    "version": "1.5.3",
-    "description": "Node Sellsy API wrapper",
-    "license": "MIT",
-    "repository": "revolunet/node-sellsy",
-    "author": {
-        "name": "Julien Bouquillon",
-        "email": "julien@bouquillon.com",
-        "url": "http://github.com/revolunet"
-    },
-    "files": [
-        "dist",
-        "examples"
-    ],
-    "engines": {
-        "node": ">=0.10.0"
-    },
-    "scripts": {
-        "test": "babel-node ./node_modules/.bin/tape 'spec/**/*.spec.js' | tap-spec",
-        "build": "babel -d ./dist ./src"
-    },
-    "main": "dist/index.js",
-    "keywords": [
-        "node",
-        "babel",
-        "test",
-        "tape"
-    ],
-    "dependencies": {
-        "oauth": "0.9.15",
-        "prettier-eslint": "^13.0.0"
-    },
-    "devDependencies": {
-        "@babel/cli": "^7.15.7",
-        "@babel/core": "^7.15.5",
-        "@babel/node": "^7.15.4",
-        "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
-        "@babel/preset-env": "^7.15.6",
-        "babel-eslint": "^10.1.0",
-        "eslint": "^5.16.0",
-        "mockery": "^1.7.0",
-        "sinon": "^1.17.7",
-        "tap-spec": "^5.0.0",
-        "tape": "^5.3.1"
-    }
+  "name": "node-sellsy",
+  "version": "1.5.3",
+  "description": "Node Sellsy API wrapper",
+  "license": "MIT",
+  "repository": "revolunet/node-sellsy",
+  "author": {
+    "name": "Julien Bouquillon",
+    "email": "julien@bouquillon.com",
+    "url": "http://github.com/revolunet"
+  },
+  "files": [
+    "dist",
+    "examples"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "babel-node ./node_modules/.bin/tape 'spec/**/*.spec.js' | tap-spec",
+    "build": "babel -d ./dist ./src",
+    "lint": "prettier -c src && eslint src"
+  },
+  "main": "dist/index.js",
+  "keywords": [
+    "sellsy"
+  ],
+  "dependencies": {
+    "oauth": "0.9.15"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/eslint-parser": "^7.16.0",
+    "@babel/node": "^7.15.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
+    "@babel/preset-env": "^7.15.6",
+    "eslint": "^8.1.0",
+    "mockery": "^1.7.0",
+    "prettier-eslint": "^13.0.0",
+    "sinon": "^1.17.7",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.3.1"
+  }
 }
