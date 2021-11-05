@@ -1,6 +1,6 @@
 # node-sellsy
 
-[![npm](https://img.shields.io/npm/v/node-sellsy.svg)](https://www.npmjs.com/package/node-sellsy) ![license](https://img.shields.io/npm/l/node-sellsy.svg) [![github-issues](https://img.shields.io/github/issues/revolunet/node-sellsy.svg)](https://github.com/revolunet/node-sellsy/issues) [![Circle CI build status](https://circleci.com/gh/revolunet/node-sellsy.svg?style=svg)](https://circleci.com/gh/revolunet/node-sellsy)
+[![npm](https://img.shields.io/npm/v/node-sellsy.svg)](https://www.npmjs.com/package/node-sellsy) ![license](https://img.shields.io/npm/l/node-sellsy.svg) [![github-issues](https://img.shields.io/github/issues/revolunet/node-sellsy.svg)](https://github.com/revolunet/node-sellsy/issues)
 
 ![nodei.co](https://nodei.co/npm/node-sellsy.png?downloads=true&downloadRank=true&stars=true)
 
