@@ -1,119 +1,137 @@
-'use strict';
+"use strict";
 
-import test from 'tape';
-import sinon from 'sinon';
+import test from "tape";
+import sinon from "sinon";
 
-import Customers from '../src/Customers';
+import Customers from "../src/Customers";
 
 // sample sellsy responses
 const dataMocks = {
   Client: {
     create: {
       success: {
-        status: 'success',
-        response: {client_id: 123}
-      }
+        status: "success",
+        response: { client_id: 123 },
+      },
     },
     getList: {
       valid: {
         response: {
           infos: {
-            nbtotal: '2'
+            nbtotal: "2",
           },
           result: {
-            1: { hello: 'world'},
-            2: { x: '123'}
-          }
-        }
+            1: { hello: "world" },
+            2: { x: "123" },
+          },
+        },
       },
       invalid: {
         response: {
           infos: {
-            nbtotal: '0'
+            nbtotal: "0",
           },
-          result: []
-        }
-      }
+          result: [],
+        },
+      },
     },
     getOne: {
       valid: {
         response: {
-          client: { id: '123'},
-          success: true
-        }
+          client: { id: "123" },
+          success: true,
+        },
       },
       invalid: {
         response: {
           result: [],
-          success: false
-        }
-      }
-    }
+          success: false,
+        },
+      },
+    },
   },
-
 };
 
 function getSellsyApiMock(apiMock) {
   // stub sellsy responses with a custom function
   let sellsyMock = {
-    api: function() {}
+    api: function () {},
   };
-  sinon.stub(sellsyMock, 'api', apiMock);
+  sinon.stub(sellsyMock, "api", apiMock);
   return sellsyMock;
 }
 
 test("Customers.create should call sellsy api", (t) => {
   t.plan(3);
 
-  var sellsyMock = getSellsyApiMock(function(options) {
-    if (options.method === 'Client.getOne') {
+  var sellsyMock = getSellsyApiMock(function (options) {
+    if (options.method === "Client.getOne") {
       return Promise.resolve(dataMocks.Client.getOne.valid);
-    } else if (options.method === 'Client.create') {
+    } else if (options.method === "Client.create") {
       return Promise.resolve(dataMocks.Client.create.success);
     }
   });
   var customers = new Customers(sellsyMock);
 
-  let customerData = {id: 123};
-  customers.create(customerData).then(result => {
-    // should create the customer then fetch it
-    let clientEmail = 'test@test.com';
-    let expectedApiCalls =  [{
-      method: 'Client.create',
-      params: customerData
-    },{
-      method: 'Client.getOne',
-      params: { clientid: 123 }
-    },]
-    t.equal(sellsyMock.api.callCount, 2, `should call API twice`);
-    expectedApiCalls.forEach((expectedCall, index) => {
-      t.deepEqual(sellsyMock.api.getCall(index).args[0], expectedCall, `should call ${expectedCall.method} with correct data`);
-    });
-    t.end();
-  }).catch(console.log);
+  let customerData = { id: 123 };
+  customers
+    .create(customerData)
+    .then(() => {
+      // result
+      // should create the customer then fetch it
+      // let clientEmail = "test@test.com";
+      let expectedApiCalls = [
+        {
+          method: "Client.create",
+          params: customerData,
+        },
+        {
+          method: "Client.getOne",
+          params: { clientid: 123 },
+        },
+      ];
+      t.equal(sellsyMock.api.callCount, 2, `should call API twice`);
+      expectedApiCalls.forEach((expectedCall, index) => {
+        t.deepEqual(
+          sellsyMock.api.getCall(index).args[0],
+          expectedCall,
+          `should call ${expectedCall.method} with correct data`
+        );
+      });
+      t.end();
+    })
+    .catch(console.log);
 });
 
 test("Customers.get should call sellsy api", (t) => {
   t.plan(3);
 
-  var sellsyMock = getSellsyApiMock(function(options) {
+  var sellsyMock = getSellsyApiMock(function () {
     return Promise.resolve(dataMocks.Client.getList.valid);
   });
   var customers = new Customers(sellsyMock);
 
-  let searchParams = {abc: 123};
-  let result = null;
-  customers.get(searchParams).then(result => {
-    let firstResult = dataMocks.Client.getList.valid.response.result[Object.keys(dataMocks.Client.getList.valid.response.result)[0]];
-    t.deepEqual(result, firstResult, `should return first result`);
-  }).catch(console.log);
+  let searchParams = { abc: 123 };
+  customers
+    .get(searchParams)
+    .then((result) => {
+      let firstResult =
+        dataMocks.Client.getList.valid.response.result[
+          Object.keys(dataMocks.Client.getList.valid.response.result)[0]
+        ];
+      t.deepEqual(result, firstResult, `should return first result`);
+    })
+    .catch(console.log);
   t.equal(sellsyMock.api.callCount, 1, `should call API`);
   let expectedCall = {
-    method: 'Client.getList',
+    method: "Client.getList",
     params: {
-      search: searchParams
-    }
+      search: searchParams,
+    },
   };
-  t.deepEqual(sellsyMock.api.getCall(0).args[0], expectedCall, `should call get with correct data`);
-
+  t.deepEqual(
+    sellsyMock.api.getCall(0).args[0],
+    expectedCall,
+    `should call get with correct data`
+  );
 });

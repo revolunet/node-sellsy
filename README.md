@@ -14,40 +14,42 @@ For example i use a Stripe webhook to automate actions in Sellsy.
 
 ## Features
 
- - Works with your oauth private app id
- - Simple promise call for all methods in http://api.sellsy.fr/documentation/methodes
+- Works with your oauth private app id
+- Simple promise call for all methods in http://api.sellsy.fr/documentation/methodes
 
 ## QuickStart
 
 `npm i --save node-sellsy`
 
 ```js
-
-var Sellsy = require('node-sellsy');
+var Sellsy = require("node-sellsy");
 
 var sellsy = new Sellsy({
   creds: {
-    consumerKey: 'myConsumerKey',
-    consumerSecret: 'myConsumerSecret',
-    userToken: 'myUserToken',
-    userSecret: 'myUserSecret'
-  }
+    consumerKey: "myConsumerKey",
+    consumerSecret: "myConsumerSecret",
+    userToken: "myUserToken",
+    userSecret: "myUserSecret",
+  },
 });
 
 var params = {
   search: {
-    contains: 'test',
-  }
+    contains: "test",
+  },
 };
 
-sellsy.api({
-  method: 'Client.getList',
-  params: params
-}).then(data => {
-  console.log('data', data);
-}).catch(e => {
-  console.log('error:', e);
-});
+sellsy
+  .api({
+    method: "Client.getList",
+    params: params,
+  })
+  .then((data) => {
+    console.log("data", data);
+  })
+  .catch((e) => {
+    console.log("error:", e);
+  });
 ```
 
 ## API
@@ -65,32 +67,31 @@ Then, define the endPoint when creating your `Sellsy` instance :
 ```js
 var sellsy = new Sellsy({
   creds,
-  endPoint: 'http://path/to/sellsy/proxy'
+  endPoint: "http://path/to/sellsy/proxy",
 });
 ```
-
 
 ### Higher-level API methods :
 
 #### Customer
 
- - `sellsy.customers.create(data)`
- - `sellsy.customers.get({ email: 'customer@gmail.com' })`
+- `sellsy.customers.create(data)`
+- `sellsy.customers.get({ email: 'customer@gmail.com' })`
 
 #### Document
 
- - `sellsy.documents.create(data)`
- - `sellsy.documents.createPayment(docType, docId, paymentData)`
- - `sellsy.documents.getList(docType, search)`
- - `sellsy.documents.getById(docType, docId)`
- - `sellsy.documents.updateStep(docType, docId, step)`
+- `sellsy.documents.create(data)`
+- `sellsy.documents.createPayment(docType, docId, paymentData)`
+- `sellsy.documents.getList(docType, search)`
+- `sellsy.documents.getById(docType, docId)`
+- `sellsy.documents.updateStep(docType, docId, step)`
 
 ## Scripts
 
- - **npm run readme** : `node ./node_modules/node-readme/bin/node-readme.js`
- - **npm run test** : `find ./spec -iname '*.spec.js' -exec ./node_modules/.bin/babel-node {} \; | ./node_modules/.bin/tap-spec`
- - **npm run zuul** : `./node_modules/zuul/bin/zuul -- spec/**/*.spec.js`
- - **npm run build** : `babel -d ./dist ./src`
+- **npm run readme** : `node ./node_modules/node-readme/bin/node-readme.js`
+- **npm run test** : `find ./spec -iname '*.spec.js' -exec ./node_modules/.bin/babel-node {} \; | ./node_modules/.bin/tap-spec`
+- **npm run zuul** : `./node_modules/zuul/bin/zuul -- spec/**/*.spec.js`
+- **npm run build** : `babel -d ./dist ./src`
 
 ## Examples
 
@@ -99,17 +100,17 @@ var sellsy = new Sellsy({
 ```js
 let sellsy = new Sellsy({
   creds: {
-    consumerKey: 'myConsumerKey',
-    consumerSecret: 'myConsumerSecret',
-    userToken: 'myUserToken',
-    userSecret: 'myUserSecret'
-  }
+    consumerKey: "myConsumerKey",
+    consumerSecret: "myConsumerSecret",
+    userToken: "myUserToken",
+    userSecret: "myUserSecret",
+  },
 });
 
 const customerIdent = "1234";
 const amountHorsTaxes = 42;
 
-sellsy.customers.get({ ident: customerIdent }).then(customer => {
+sellsy.customers.get({ ident: customerIdent }).then((customer) => {
   const documentData = {
     document: {
       doctype: "invoice",
@@ -118,10 +119,10 @@ sellsy.customers.get({ ident: customerIdent }).then(customer => {
       currency: "1",
       displayedDate: new Date().getTime() / 1000,
       subject: "Sujet de la facture",
-      tags: "bookeo,stripe"
+      tags: "bookeo,stripe",
     },
     row: {
-      "1": {
+      1: {
         // use 'item' for object from catalog
         row_type: "once",
         row_name: "titre ligne facture",
@@ -129,15 +130,16 @@ sellsy.customers.get({ ident: customerIdent }).then(customer => {
         row_notes: "notes ligne facture",
         row_tax: 20,
         row_unitAmount: amountHorsTaxes,
-        row_qt: 1
-      }
-    }
+        row_qt: 1,
+      },
+    },
   };
 
   return sellsy.documents.create(documentData);
 });
 ```
-Then you can use 
+
+Then you can use
 
 `sellsy.documents.updateStep(createdDocument.type, createdDocument.id, 'paid')` to mark invoice as paid and `sellsy.documents.createPayment` to record the payment method
 
@@ -188,11 +190,10 @@ Then you can use
   duration:  1.8s
 ```
 
-
 ## Author
 
 Julien Bouquillon <julien@bouquillon.com> http://github.com/revolunet and [contributors](https://github.com/revolunet/node-sellsy/graphs/contributors)
 
 ## License
 
- - **MIT** : http://opensource.org/licenses/MIT
+- **MIT** : http://opensource.org/licenses/MIT
