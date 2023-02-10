@@ -60,7 +60,7 @@ This call returns a promise.
 
 ### Browser usage
 
-Sellsy API doesnt provide CORS access so here's a drop-in proxy you can deploy on your own to use `node-bookeo` on the client : [revolunet/sellsy-proxy](http://github.com/revolunet/sellsy-proxy).
+Sellsy API doesnt provide CORS access so here's a drop-in proxy you can deploy on your own to use `node-sellsy` on the client : [revolunet/sellsy-proxy](http://github.com/revolunet/sellsy-proxy).
 
 Then, define the endPoint when creating your `Sellsy` instance :
 
